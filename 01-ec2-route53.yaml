@@ -21,9 +21,9 @@
     loop: "{{ instances }}"
     register: ec2_output
 
-  - name: print the ec2_output
-    ansible.builtin.debug:
-     msg: "{{ ec2_output }}"
+  # - name: print the ec2_output
+  #   ansible.builtin.debug:
+  #    msg: "{{ ec2_output }}"
 
   # - name: print public_ip
   #   ansible.builtin.debug: 
@@ -34,15 +34,15 @@
   #   ansible.builtin.debug:
   #     msg: "{{ item.instances[0].private_ip_address }}"
   #   loop: "{{ ec2_output.results }}"
-- name: create r53
-  amazon.aws.r53: 
+- name: create route53 record
+  amazon.aws.route53 record: 
    name: "{{ item }}"
    state: present
    zone: "{{ domain_name }}"
-   record: "{{ item.item }}.{{domain_name}}"
+   record: "{{ item.item }}.{{domain_name}}" #mogodb.kaws86s.shop
    type: A
    ttl: 1
-   value: "{{ item.item }}.{{ domain_name }}"
+   value: "{{ item.instances[0].private_ip_address }}"
    overwrite: true 
   loop: "{{ ec2_output.results }}"  
   
