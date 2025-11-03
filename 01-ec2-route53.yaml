@@ -7,7 +7,7 @@
     zone_id: "Z03705962F6GC0P7UF7E3" # replace with your ID
     domain_name: "kaws86s.shop"
     # we can pass instances through command line using -e
-    instance: 
+    instances: 
     - mongodb
   tasks:
   - name: create ec2 instance
@@ -18,17 +18,10 @@
       image_id: "{{ ami_id }}"
       tags:
         Name: "{{ item }}"
-    loop: "{{ instance }}"
+    loop: "{{ instances }}"
     register: ec2_output
 
   - name: print the ec2_output
     ansible.builtin.debug:
      msg: "{{ ec2_output }}"
 
-  - name: print public_ip
-    ansible.builtin.debug: "{{ item.instance [0].public_ip_address }}"
-    loop: "{{ ec2_output.results }}"
-
-  - name: print private_ip
-    ansible.builtin.debug: "{{ item.instance [0].private_ip_address }}"
-    loop: "{{ ec2_output.results }}"
