@@ -21,9 +21,9 @@
     loop: "{{ instances }}"
     register: ec2_output
 
-  # - name: print the ec2_output
-  #   ansible.builtin.debug:
-  #    msg: "{{ ec2_output }}"
+  - name: print the ec2_output
+    ansible.builtin.debug:
+     msg: "{{ ec2_output }}"
 
   # - name: print public_ip
   #   ansible.builtin.debug: 
@@ -42,4 +42,9 @@
    record: "{{ item.item }}.{{domain_name}}"
    type: A
    ttl: 1
-   value: "{{ item.instances[0].private_ip_address }}"
+   value: "{{ item.item }}.{{ domain_name }}"
+   overwrite: true 
+  loop: "{{ ec2_output.results }}"  
+  
+  
+   
