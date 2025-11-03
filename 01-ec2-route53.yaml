@@ -7,11 +7,11 @@
     zone_id: "Z03705962F6GC0P7UF7E3" # replace with your ID
     domain_name: "kaws86s.shop"
     # we can pass instances through command line using -e
-    instances: 
-    - mongodb
-    - redis 
-    - mysql 
-    - rabbitMQ
+    # instances: 
+    # - mongodb
+    # - redis 
+    # - mysql 
+    # - rabbitMQ
    
   tasks:
   - name: create ec2 instance
