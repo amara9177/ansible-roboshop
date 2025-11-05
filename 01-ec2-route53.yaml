@@ -8,16 +8,16 @@
     domain_name: "kaws86s.shop"
     # we can pass instances through command line using -e
     instances: 
-    - mongodb
-    - redis 
-    - mysql 
-    - rabbitMQ
-    - catalogue
-    - shipping
-    - cart 
-    - user 
-    - payment 
-    - frontend
+    # - mongodb
+    # - redis 
+    # - mysql 
+    # - rabbitMQ
+    # - catalogue
+    # - shipping
+    # - cart 
+    # - user 
+    # - payment 
+    # - frontend
    
   tasks:
   - name: create ec2 instance
